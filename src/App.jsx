@@ -3,6 +3,8 @@ import Webcam from "react-webcam";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const BACKEND_URL = "https://emotion-detector-backend.vercel.app"; // ✅ Use deployed backend
+
 const emotionSuggestions = {
   sad: ["🎧 Listen to calming music", "📓 Try journaling your thoughts", "🤖 Chat with a support bot", "🎥 Watch motivational videos"],
   angry: ["🧘 Do deep breathing exercises", "📖 Read peaceful quotes", "💆 Try stress relief tips"],
@@ -35,7 +37,7 @@ function App() {
         if (!imageSrc) return;
 
         try {
-          const res = await axios.post("http://localhost:5000/detect_emotion", {
+          const res = await axios.post(`${BACKEND_URL}/detect_emotion`, {
             image: imageSrc,
           });
           const detected = res.data.emotion;
@@ -56,7 +58,7 @@ function App() {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/detect_emotion", {
+      const response = await axios.post(`${BACKEND_URL}/detect_emotion`, {
         image: imageSrc,
       });
 
@@ -124,7 +126,6 @@ function App() {
         </ul>
       </div>
 
-      {/* Heading */}
       <h1 className="text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r 
                    from-purple-600 to-blue-500 dark:from-pink-400 dark:to-purple-400 
                    mb-6 sm:mb-8 drop-shadow-lg transition-all text-center">
