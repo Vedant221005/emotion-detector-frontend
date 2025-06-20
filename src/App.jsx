@@ -25,10 +25,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [error, setError] = useState("");
-  const [faceDetected, setFaceDetected] = useState(null); // ✅ new state for border logic
+  const [faceDetected, setFaceDetected] = useState(null);
   const navigate = useNavigate();
 
-  // 🔁 Auto-check face presence every 2 seconds
   useEffect(() => {
     const interval = setInterval(async () => {
       if (webcamRef.current) {
@@ -39,15 +38,13 @@ function App() {
           const res = await axios.post("http://localhost:5000/detect_emotion", {
             image: imageSrc,
           });
-
           const detected = res.data.emotion;
           setFaceDetected(detected !== "no_face");
         } catch (err) {
           console.error("Auto face check error", err);
         }
       }
-    }, 2000); // every 2 sec
-
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
@@ -93,11 +90,11 @@ function App() {
   return (
     <div
       id="rootElement"
-      className="relative min-h-screen p-6 flex flex-col items-center justify-center 
+      className="relative min-h-screen p-4 sm:p-6 flex flex-col items-center justify-center 
                  bg-gradient-to-br from-indigo-100 to-pink-100 
                  dark:from-gray-900 dark:to-gray-800 transition-all duration-500"
     >
-      {/* Toggle Switch */}
+      {/* Toggle Dark Mode */}
       <button
         onClick={toggleDarkMode}
         className="absolute top-4 right-4 flex items-center gap-2 bg-white dark:bg-gray-700 
@@ -113,32 +110,30 @@ function App() {
         </span>
         {isDarkMode ? "Dark mode" : "Light mode"}
       </button>
+
+      {/* Face Detection Guide */}
       <div
-        className="absolute top-16 right-4 w-[340px] bg-white/60 dark:bg-gray-700/40 p-4 rounded-xl shadow-md text-sm text-gray-800 dark:text-gray-200"
+        className="mt-20 sm:mt-0 sm:absolute sm:top-16 sm:right-4 w-full max-w-xs bg-white/60 dark:bg-gray-700/40 
+                   p-4 rounded-xl shadow-md text-sm text-gray-800 dark:text-gray-200"
       >
         <p className="font-bold mb-2">🎯 Face Detection Guide</p>
         <ul className="list-disc list-inside space-y-1">
-          <li>
-            <span className="font-medium text-green-600">Green Border</span>: Face detected successfully
-          </li>
-          <li>
-            <span className="font-medium text-red-600">Red Border</span>: No face detected — adjust your position
-          </li>
-          <li>
-            <span className="font-medium text-blue-600">Blue Border</span>: Waiting for face detection
-          </li>
+          <li><span className="font-medium text-green-600">Green Border</span>: Face detected successfully</li>
+          <li><span className="font-medium text-red-600">Red Border</span>: No face detected — adjust your position</li>
+          <li><span className="font-medium text-blue-600">Blue Border</span>: Waiting for face detection</li>
         </ul>
       </div>
 
-      <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r 
+      {/* Heading */}
+      <h1 className="text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r 
                    from-purple-600 to-blue-500 dark:from-pink-400 dark:to-purple-400 
-                   mb-8 drop-shadow-lg transition-all duration-500 text-center">
+                   mb-6 sm:mb-8 drop-shadow-lg transition-all text-center">
         Emotion Detector
       </h1>
 
-      {/* Webcam Section with Dynamic Border */}
+      {/* Webcam Section */}
       <div
-        className={`w-full max-w-xl rounded-xl overflow-hidden p-1 shadow-xl transition-all duration-300 
+        className={`w-full max-w-md sm:max-w-xl rounded-xl overflow-hidden p-1 shadow-xl transition-all duration-300 
           ${
             faceDetected === null
               ? "border-4 border-blue-600"
@@ -150,29 +145,32 @@ function App() {
         <Webcam
           ref={webcamRef}
           screenshotFormat="image/jpeg"
-          className="w-full h-[400px] object-cover rounded-lg"
+          className="w-full h-[300px] sm:h-[400px] object-cover rounded-lg"
           videoConstraints={{ facingMode: "user" }}
         />
       </div>
 
+      {/* Detect Button */}
       <button
         onClick={capture}
         className="mt-6 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 
                    hover:from-purple-600 hover:to-blue-600 text-white font-bold 
-                   rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+                   rounded-full shadow-lg transition duration-300 transform hover:scale-105"
       >
         {loading ? "Detecting..." : "Detect Emotion"}
       </button>
 
+      {/* Error Display */}
       {error && (
-        <div className="mt-4 text-red-600 font-semibold text-lg animate-pulse">
+        <div className="mt-4 text-red-600 font-semibold text-lg animate-pulse text-center px-2">
           {error}
         </div>
       )}
 
+      {/* Emotion Result */}
       {emotion && (
         <div className="mt-8 w-full max-w-lg text-center animate-fade-in">
-          <div className="text-3xl font-bold text-gray-800 dark:text-white transition-all mb-3">
+          <div className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white transition-all mb-3">
             Detected Emotion:{" "}
             <span className="capitalize text-purple-700 dark:text-pink-400">
               {emotionEmojis[emotion.toLowerCase()] || "🙂"} {emotion}
@@ -182,7 +180,7 @@ function App() {
           {emotionSuggestions[emotion.toLowerCase()] && (
             <div className="mt-4 bg-white/40 dark:bg-gray-700/40 backdrop-blur-xl 
                             p-6 rounded-xl shadow-lg border border-white/20 dark:border-gray-500">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3">
                 💡 Suggestions for You:
               </h2>
               <ul className="list-disc list-inside text-gray-800 dark:text-gray-200 space-y-2 text-left">
