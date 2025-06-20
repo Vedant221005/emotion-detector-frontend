@@ -151,6 +151,7 @@ function App() {
           ref={webcamRef}
           screenshotFormat="image/jpeg"
           className="w-full h-[400px] object-cover rounded-lg"
+          videoConstraints={{ facingMode: "user" }}
         />
       </div>
 
