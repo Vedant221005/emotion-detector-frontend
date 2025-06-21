@@ -1,3 +1,38 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  .animate-slide-up {
+    animation: slideUp 0.6s ease forwards;
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-60px);
+      opacity: 0;
+    }
+  }
+
+  .animate-merge {
+    animation: mergeLetters 0.6s ease-in-out forwards;
+  }
+
+  @keyframes mergeLetters {
+    0% {
+      gap: 20rem;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      gap: 0.5rem;
+      opacity: 1;
+    }
+  }
+}
