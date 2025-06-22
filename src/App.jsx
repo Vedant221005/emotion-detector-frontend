@@ -107,8 +107,7 @@ function App() {
     setIsDarkMode(!isDarkMode);
   };
 
-  const sadMoods = ["sad", "angry", "fear"];
-  const isNegativeMood = sadMoods.includes(emotion.toLowerCase());
+  const showGameButton = ["sad", "angry", "fear", "neutral"].includes(emotion.toLowerCase());
 
   // ------------------ PRELOADER -------------------
   if (showPreloader) {
@@ -249,15 +248,14 @@ function App() {
               </ul>
             </div>
           )}
-
-          {isNegativeMood && (
-            <button
-              onClick={() => navigate("/games")}
-              className="mt-6 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full font-semibold shadow-lg transition duration-300"
-            >
-              🎮 Play Uplifting Games
-            </button>
-          )}
+            {showGameButton && (
+              <button
+                onClick={() => navigate("/games")}
+                className="mt-6 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full font-semibold shadow-lg transition duration-300"
+              >
+                🎮 Play Uplifting Games
+              </button>
+            )}
         </div>
       )}
     </div>
