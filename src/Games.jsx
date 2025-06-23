@@ -43,14 +43,14 @@ const Games = () => {
         <a href="https://minesweeperonline.com/" target="_blank" rel="noreferrer" className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition">
           💣 Minesweeper
         </a>
-        <a href="https://games.construct.net/free-online-games/memory" target="_blank" rel="noreferrer" className="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition">
-          🧠 Memory Game
+        <a href="https://www.google.com/logos/2010/pacman10-i.html" target="_blank" rel="noreferrer" className="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition">
+          👾 Pac-Man Doodle
         </a>
         <a href="https://play2048.co/" target="_blank" rel="noreferrer" className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition">
           🔢 2048 Puzzle
         </a>
-        <a href="https://cat-bounce.com/" target="_blank" rel="noreferrer" className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition">
-          🐱 Cat Bounce
+        <a href="https://trex-runner.com" target="_blank" rel="noreferrer" className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition">
+          🦖 Dinosaur T-Rex Game
         </a>
         <a href="https://doodlecricket.github.io/" target="_blank" rel="noreferrer" className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition">
           🏏 Doodle Cricket

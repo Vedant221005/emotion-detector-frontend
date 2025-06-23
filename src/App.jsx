@@ -198,6 +198,7 @@ function App() {
           </button>
         </div>
 
+
         {/* Face Guide */}
         <div className="sm:absolute sm:top-16 sm:right-4 w-full max-w-xs bg-white/60 dark:bg-gray-700/40 
           p-4 rounded-xl shadow-md text-sm text-gray-800 dark:text-gray-200">
