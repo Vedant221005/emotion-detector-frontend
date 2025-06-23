@@ -58,10 +58,12 @@ function App() {
         if (!imageSrc) return;
 
         try {
-          const res = await axios.post("https://emotion-backend-buea.onrender.com/detect_emotion", {
-            image: imageSrc,
-          });
-          const detected = res.data.emotion;
+          const response = await axios.post(
+            "https://emotion-backend-buea.onrender.com/detect_emotion",
+            { image: imageSrc },
+            { headers: { "Content-Type": "application/json" } }
+          );
+          const detected = response.data.emotion;
           setFaceDetected(detected !== "no_face");
         } catch (err) {
           console.error("Auto face check error", err);
@@ -79,9 +81,11 @@ function App() {
     setError("");
 
     try {
-      const response = await axios.post("https://emotion-backend-buea.onrender.com/detect_emotion", {
-        image: imageSrc,
-      });
+          const response = await axios.post(
+            "https://emotion-backend-buea.onrender.com/detect_emotion",
+            { image: imageSrc },
+            { headers: { "Content-Type": "application/json" } }
+          );
 
       const detected = response.data.emotion;
 
