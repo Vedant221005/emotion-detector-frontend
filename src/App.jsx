@@ -58,7 +58,7 @@ function App() {
         if (!imageSrc) return;
 
         try {
-          const res = await axios.post("http://localhost:5000/detect_emotion", {
+          const res = await axios.post("https://emotion-backend-buea.onrender.com/detect_emotion", {
             image: imageSrc,
           });
           const detected = res.data.emotion;
@@ -79,7 +79,7 @@ function App() {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/detect_emotion", {
+      const response = await axios.post("https://emotion-backend-buea.onrender.com/detect_emotion", {
         image: imageSrc,
       });
 
